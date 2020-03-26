@@ -1,7 +1,7 @@
 -----TODO-----
 Working Player
 Art
-Enemys
+Enemies
 Enviroment
 
 
