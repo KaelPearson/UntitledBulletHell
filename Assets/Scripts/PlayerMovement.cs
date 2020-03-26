@@ -12,7 +12,7 @@ public class PlayerMovement : NetworkBehaviour {
     }
 
     void Update() {
-        if(!isLocalPlayer){
+        if(!base.isLocalPlayer){
             return;
         }
         Vector3 pos = transform.position;
