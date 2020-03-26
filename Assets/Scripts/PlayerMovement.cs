@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : NetworkBehaviour {
     Rigidbody2D rb;
     public float movementSpeed = 5;
 
@@ -11,7 +12,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update() {
-        
+        if(!isLocalPlayer){
+            return;
+        }
         Vector3 pos = transform.position;
 
         if (Input.GetKey("w")) {
