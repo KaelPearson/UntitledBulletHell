@@ -15,14 +15,9 @@ public class PlayerShoot : NetworkBehaviour
 
     }
 
-    void Update()
-    {
-        if(!base.isLocalPlayer){
-            return;
-        }
-
-        if (Input.GetMouseButton(0) && timer >= delayBetweenBullets) {
-            // Gets MousePos and sets the Z to 0 because 2d field
+    [Command]
+    void CmdFire(){
+        // Gets MousePos and sets the Z to 0 because 2d field
             Vector3 shootDirection = Input.mousePosition;
             shootDirection.z = 0.0f;
 
@@ -38,7 +33,22 @@ public class PlayerShoot : NetworkBehaviour
 
             // Adds force as a impulse
             bulletInstance.GetComponent<Rigidbody2D>().AddForce(pos * speed, ForceMode2D.Impulse);
+
+            // Spawns on server as well
+            NetworkServer.Spawn(bulletInstance);
+
             timer = 0;
+
+    }
+
+    void Update()
+    {
+        if(!base.isLocalPlayer){
+            return;
+        }
+
+        if (Input.GetMouseButton(0) && timer >= delayBetweenBullets) {
+            CmdFire();
         }
         timer += Time.deltaTime;
     }
