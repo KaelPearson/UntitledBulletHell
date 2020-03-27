@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 8801459677584375631}
   - component: {fileID: 8801459677584375627}
   - component: {fileID: 8801459677584375630}
+  - component: {fileID: -3035306907184622909}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2f5f01f68e65946836f9bdeb43eac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 5
 --- !u!114 &8801459677584375627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +170,20 @@ MonoBehaviour:
   localRotationSensitivity: 0
   localScaleSensitivity: 0
   compressRotation: 1
+--- !u!114 &-3035306907184622909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801459677584375624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd5dd3655264a14e8a797d61b66c469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  shootDelay: 1.5
+  bullet: {fileID: 1900937913432530374, guid: dbceb894d9b3a4541b3d77ca201f43f1, type: 3}
+  speed: 5
