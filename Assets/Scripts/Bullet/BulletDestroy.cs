@@ -11,12 +11,15 @@ public class BulletDestroy : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision){
 
+        if(collision.tag == "Bullet" || collision.tag == "EnemyBullet"){
+            return;
+        }
         if(gameObject.tag == "Bullet"){
-            if(collision.tag != "Player" && collision.tag != "Bullet"){
+            if(collision.tag != "Player"){
                 Destroy(gameObject);
             }
         } else if (gameObject.tag == "EnemyBullet"){
-            if(collision.tag != "Enemy" && collision.tag != "EnemyBullet"){
+            if(collision.tag != "Enemy"){
                 Destroy(gameObject);
             }
         }

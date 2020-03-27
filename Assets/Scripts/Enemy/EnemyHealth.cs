@@ -19,7 +19,7 @@ public class EnemyHealth : MonoBehaviour
         if(collision.tag == "Bullet"){
             health--;
             if(health == 0){
-                Destroy(gameObject, 0.2f);
+                Destroy(gameObject, 0.05f);
             }
         }
     }
