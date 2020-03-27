@@ -9,22 +9,13 @@ public class PlayerShoot : NetworkBehaviour
 
     float timer = 0;
     public float delayBetweenBullets = 1;
-
+    Vector3 shootDirection = new Vector3();
     void Start()
     {
 
     }
-
-    [Command]
-    void CmdFire(){
-
-        // Gets MousePos and sets the Z to 0 because 2d field
-        Vector3 shootDirection = Input.mousePosition;
-        shootDirection.z = 0.0f;
-
-        // Transforms from screen space to world space 
-        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-
+    [ClientRpc]
+    void RpcFire(){
         // Create bullet on player
         GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0,0,0)));
 
@@ -36,18 +27,29 @@ public class PlayerShoot : NetworkBehaviour
 
         // Spawns on server as well
         NetworkServer.Spawn(bulletInstance);
-
-        timer = 0;
     }
+    [Command]
+    void CmdFire(){
+        RpcFire();
+    }
+    void fire(){
+        // Gets MousePos and sets the Z to 0 because 2d field
+        shootDirection = Input.mousePosition;
+        shootDirection.z = 0.0f;
 
+        // Transforms from screen space to world space 
+        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+        CmdFire();
+
+    }
     void Update()
     {
         if(!base.isLocalPlayer){
             return;
         }
-
         if (Input.GetMouseButton(0) && timer >= delayBetweenBullets) {
-            CmdFire();
+            fire();
+            timer = 0;
         }
         timer += Time.deltaTime;
     }

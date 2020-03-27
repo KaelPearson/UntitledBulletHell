@@ -9,8 +9,7 @@ public class PlayerMovement : NetworkBehaviour {
 
     public float delayRoll = 3;
     float timer;
-    float rollTimer = 0;
-    public float rollDelay = 10;
+    
     void Start() {
         timer = delayRoll;
         rb = GetComponent<Rigidbody2D>();

@@ -140,7 +140,6 @@ MonoBehaviour:
   syncInterval: 0.1
   movementSpeed: 5
   delayRoll: 0.3
-  rollDelay: 5
 --- !u!114 &-6570992716857288447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +175,7 @@ MonoBehaviour:
   syncInterval: 0.1
   bullet: {fileID: 1900937913432530374, guid: dbceb894d9b3a4541b3d77ca201f43f1, type: 3}
   speed: 2
-  delayBetweenBullets: 0.2
+  delayBetweenBullets: 0.5
 --- !u!58 &3424167977580699745
 CircleCollider2D:
   m_ObjectHideFlags: 0
