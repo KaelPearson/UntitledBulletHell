@@ -18,10 +18,9 @@ public class PlayerShoot : NetworkBehaviour
 
     [Command]
     void CmdFire(Vector2 shootDirection, Vector3 tranPos){
-
-
         RpcFire(shootDirection, tranPos);
     }
+    
     [ClientRpc]
     void RpcFire(Vector2 shootDirection, Vector3 tranPos){
 
