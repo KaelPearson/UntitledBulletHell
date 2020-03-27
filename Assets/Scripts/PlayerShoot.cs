@@ -53,6 +53,7 @@ public class PlayerShoot : NetworkBehaviour
         }
 
         if (Input.GetMouseButton(0) && timer >= delayBetweenBullets) {
+            Debug.Log("Here");
             fire();
             timer = 0;
         }
