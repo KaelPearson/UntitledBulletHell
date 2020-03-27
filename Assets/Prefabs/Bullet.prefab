@@ -167,4 +167,4 @@ MonoBehaviour:
   localPositionSensitivity: 0
   localRotationSensitivity: 0
   localScaleSensitivity: 0
-  compressRotation: 1
+  compressRotation: 0
