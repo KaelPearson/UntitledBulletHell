@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6423354735606562635}
   - component: {fileID: -6570992716857288447}
   - component: {fileID: 3214615137586069363}
+  - component: {fileID: -4894456938743870138}
   - component: {fileID: 3424167977580699745}
   - component: {fileID: 1687965940125625379}
   - component: {fileID: 1461992122448059017}
@@ -177,6 +178,19 @@ MonoBehaviour:
   bullet: {fileID: 1900937913432530374, guid: dbceb894d9b3a4541b3d77ca201f43f1, type: 3}
   speed: 10
   delayBetweenBullets: 0.5
+--- !u!114 &-4894456938743870138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6423354735606562634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b988ba69108644eaa76a9ce4deca58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
 --- !u!58 &3424167977580699745
 CircleCollider2D:
   m_ObjectHideFlags: 0
