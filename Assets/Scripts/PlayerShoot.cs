@@ -17,28 +17,27 @@ public class PlayerShoot : NetworkBehaviour
 
     [Command]
     void CmdFire(){
+
         // Gets MousePos and sets the Z to 0 because 2d field
-            Vector3 shootDirection = Input.mousePosition;
-            shootDirection.z = 0.0f;
+        Vector3 shootDirection = Input.mousePosition;
+        shootDirection.z = 0.0f;
 
-            // Transforms from screen space to world space then direction is adjusted due to player position
-            shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-            shootDirection = shootDirection-transform.position;
+        // Transforms from screen space to world space 
+        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
 
-            // Create bullet on player
-            GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0,0,0)));
+        // Create bullet on player
+        GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0,0,0)));
 
-            // Position of bullet becomes normalized to make same speed everywhere
-            Vector2 pos = new Vector2(shootDirection.x, shootDirection.y).normalized;
+        // Position of bullet becomes normalized to make same speed everywhere
+        Vector2 pos = new Vector2(shootDirection.x, shootDirection.y).normalized;
+        pos *= speed;
+        // Adds force as a impulse
+        bulletInstance.GetComponent<Rigidbody2D>().AddForce(pos, ForceMode2D.Impulse);
 
-            // Adds force as a impulse
-            bulletInstance.GetComponent<Rigidbody2D>().AddForce(pos * speed, ForceMode2D.Impulse);
+        // Spawns on server as well
+        NetworkServer.Spawn(bulletInstance);
 
-            // Spawns on server as well
-            NetworkServer.Spawn(bulletInstance);
-
-            timer = 0;
-
+        timer = 0;
     }
 
     void Update()
