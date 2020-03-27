@@ -1,21 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerHealth : MonoBehaviour
+using UnityEngine.UI;
+using Mirror;
+public class PlayerHealth : NetworkBehaviour
 {
-    public int health = 10;
+    public int health = 5;
+    public Slider slider;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        slider.value = health;
+        if(base.isLocalPlayer){
+            return;
+        }
+        slider.gameObject.SetActive(false);
+    }
+    [Command]
+    void CmdDeletePlayer(GameObject player){
+        Destroy(player);
     }
     void OnTriggerEnter2D(Collider2D collision){
+        
+        if(!base.isLocalPlayer){
+            return;
+        }
         if(collision.tag == "EnemyBullet"){
             health--;
+            slider.value = health;
             if(health <= 0){
-                Destroy(gameObject);
+                CmdDeletePlayer(gameObject);
             }
         }
     }
