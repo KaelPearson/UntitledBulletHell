@@ -1,16 +1,19 @@
------TODO-----
+Kaels TODO :
+ - Enemies AI path finding (A*)
+ - Enemies spawning instead of just being placed before
+ - Fix bug with bullets spawning more on clients (Low priority)
 
-Art
-Enemies
-Enviroment
-
-
------IDEAS----
-Different Characters
+Tylers TODO :
+ 
 
 
-Things to do right now
-
-Update roll to be roll instead of blink
-Hud for players
-Any new features are very welcome
+Things to pick up :
+ - Weapon Drops
+ - Enviroment Building (Randomly spawned but predetermined areas)
+ - Player models
+ - Different Scenes (Worlds)
+ - Different Enemies
+ - Different Classes
+ - Change blink into roll with I frames
+ - Visual Elements
+ - Perks
