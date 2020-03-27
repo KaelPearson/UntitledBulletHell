@@ -16,18 +16,8 @@ public class EnemyShoot : NetworkBehaviour
     }
 
     float getPlayerDistance(GameObject player){
-        float distance = 0;
-        // Get pos of char
-        float x = Mathf.Abs(transform.position.x);
-        float y = Mathf.Abs(transform.position.y);
-
-        float playerx = Mathf.Abs(player.transform.position.x);
-        float playery = Mathf.Abs(player.transform.position.y);
-
-        distance = x + y;
-        distance -= playerx + playery;
-        
-        return Mathf.Abs(distance);
+        float distance = Vector3.Distance (transform.position, player.transform.position);
+        return distance;
     }
     GameObject findNearestPlayer(GameObject[] players){
         if(players == null){
@@ -62,7 +52,7 @@ public class EnemyShoot : NetworkBehaviour
 
         // Adds force as a impulse
         bulletInstance.GetComponent<Rigidbody2D>().AddForce(pos * speed, ForceMode2D.Impulse);
-        bulletInstance.tag = "EnemyBullet";
+        
         // Spawns on server as well
         NetworkServer.Spawn(bulletInstance);
     }
@@ -70,7 +60,7 @@ public class EnemyShoot : NetworkBehaviour
         Vector2 shootDirection = new Vector2();
         shootDirection[0] = player.transform.position.x - transform.position.x;
         shootDirection[1] = player.transform.position.y - transform.position.y; 
-        
+
         RpcFire(shootDirection, transform.position);
     }
     // Update is called once per frame
@@ -80,10 +70,9 @@ public class EnemyShoot : NetworkBehaviour
 
         GameObject closetPlayer = findNearestPlayer(players);
 
-        Debug.Log(closetPlayer);
 
         if(timer >= shootDelay){
-            if(closetPlayer != null && getPlayerDistance(closetPlayer) < 10){
+            if(closetPlayer != null && getPlayerDistance(closetPlayer) < 5){
                 fire(closetPlayer);
                 timer = 0;
             }

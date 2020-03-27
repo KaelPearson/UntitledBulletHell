@@ -456,6 +456,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3035306907184622909, guid: c807477f39b1b3441b615a2330c045d6,
+        type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2328155752225816964, guid: db2f6982d8e6a9949af160c55cd584fc,
+        type: 3}
     - target: {fileID: 8801459677584375624, guid: c807477f39b1b3441b615a2330c045d6,
         type: 3}
       propertyPath: m_Name
@@ -525,6 +531,21 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneId
       value: 71987809
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801459677584375627, guid: c807477f39b1b3441b615a2330c045d6,
+        type: 3}
+      propertyPath: serverOnly
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801459677584375630, guid: c807477f39b1b3441b615a2330c045d6,
+        type: 3}
+      propertyPath: compressRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801459677584375630, guid: c807477f39b1b3441b615a2330c045d6,
+        type: 3}
+      propertyPath: clientAuthority
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c807477f39b1b3441b615a2330c045d6, type: 3}
