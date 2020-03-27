@@ -1,5 +1,5 @@
 -----TODO-----
-Working Player
+
 Art
 Enemies
 Enviroment
@@ -7,3 +7,10 @@ Enviroment
 
 -----IDEAS----
 Different Characters
+
+
+Things to do right now
+
+Update roll to be roll instead of blink
+Hud for players
+Any new features are very welcome
