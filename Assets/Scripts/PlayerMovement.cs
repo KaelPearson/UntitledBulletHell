@@ -7,7 +7,12 @@ public class PlayerMovement : NetworkBehaviour {
     Rigidbody2D rb;
     public float movementSpeed = 5;
 
+    public float delayRoll = 3;
+    float timer;
+    float rollTimer = 0;
+    public float rollDelay = 10;
     void Start() {
+        timer = delayRoll;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -29,6 +34,23 @@ public class PlayerMovement : NetworkBehaviour {
         if (Input.GetKey("a")) {
             pos.x -= movementSpeed * Time.deltaTime;
         }
+        if(Input.GetKeyDown("space") && timer >= delayRoll){
+            
+            if (Input.GetKey("w")) {
+                pos.y += movementSpeed * Time.deltaTime * 7;
+            }
+            if (Input.GetKey("s")) {
+                pos.y -= movementSpeed * Time.deltaTime * 7;
+            }
+            if (Input.GetKey("d")) {
+                pos.x += movementSpeed * Time.deltaTime * 7;
+            }
+            if (Input.GetKey("a")) {
+                pos.x -= movementSpeed * Time.deltaTime * 7;
+            }
+            
+        }
         rb.MovePosition(pos);
+        timer += Time.deltaTime;
     }
 }
