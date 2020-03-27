@@ -9,44 +9,50 @@ public class PlayerShoot : NetworkBehaviour
 
     float timer = 0;
     public float delayBetweenBullets = 1;
-    Vector3 shootDirection = new Vector3();
+
     void Start()
     {
 
     }
+
+
+    [Command]
+    void CmdFire(Vector2 shootDirection, Vector3 tranPos){
+
+
+        RpcFire(shootDirection, tranPos);
+    }
     [ClientRpc]
-    void RpcFire(){
+    void RpcFire(Vector2 shootDirection, Vector3 tranPos){
+
         // Create bullet on player
-        GameObject bulletInstance = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0,0,0)));
+        GameObject bulletInstance = Instantiate(bullet, tranPos, Quaternion.Euler(new Vector3(0,0,0)));
 
         // Position of bullet becomes normalized to make same speed everywhere
         Vector2 pos = new Vector2(shootDirection.x, shootDirection.y).normalized;
-        pos *= speed;
+
         // Adds force as a impulse
-        bulletInstance.GetComponent<Rigidbody2D>().AddForce(pos, ForceMode2D.Impulse);
+        bulletInstance.GetComponent<Rigidbody2D>().AddForce(pos * speed, ForceMode2D.Impulse);
 
         // Spawns on server as well
         NetworkServer.Spawn(bulletInstance);
     }
-    [Command]
-    void CmdFire(){
-        RpcFire();
-    }
     void fire(){
         // Gets MousePos and sets the Z to 0 because 2d field
-        shootDirection = Input.mousePosition;
+        Vector3 shootDirection = Input.mousePosition;
         shootDirection.z = 0.0f;
 
-        // Transforms from screen space to world space 
+        // Transforms from screen space to world space then direction is adjusted due to player position
         shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-        CmdFire();
-
+        CmdFire(shootDirection, transform.position);
     }
+
     void Update()
     {
         if(!base.isLocalPlayer){
             return;
         }
+
         if (Input.GetMouseButton(0) && timer >= delayBetweenBullets) {
             fire();
             timer = 0;
