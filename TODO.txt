@@ -1,5 +1,5 @@
 Kaels TODO :
- - Enemies AI path finding (A*)
+ - Change enemy fire (Raycast)
  - Enemies spawning instead of just being placed before
  - Fix bug with bullets spawning more on clients (Low priority)
 
