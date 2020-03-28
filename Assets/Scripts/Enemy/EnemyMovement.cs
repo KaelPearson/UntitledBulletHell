@@ -64,9 +64,11 @@ namespace Pathfinding {
 		void Update () {
 			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        	GameObject closetPlayer = findNearestPlayer(players);
             
+        	GameObject closetPlayer = findNearestPlayer(players);
+
 			target = closetPlayer.transform;
+
 			if (target != null && ai != null) ai.destination = target.position;
 		}
     }
