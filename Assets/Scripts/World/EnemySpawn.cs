@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class EnemySpawn : NetworkBehaviour
-{
+public class EnemySpawn : NetworkBehaviour {
+
     public GameObject enemy;
     public float timer = 0;
     public float spawnTimer = 10;
 
-    [ClientRpc]
     void RpcSpawnEnemy(Vector3 pos){
         GameObject enemyInstance = Instantiate(enemy, pos, Quaternion.Euler(new Vector3(0,0,0)));
         NetworkServer.Spawn(enemyInstance);
@@ -39,6 +38,9 @@ public class EnemySpawn : NetworkBehaviour
         RpcSpawnEnemy(pos);
     }
     void Update() {
+        if(!isServer){
+            return;
+        }
         if(timer >= spawnTimer){
             spawnEnemy();
             timer = 0;
