@@ -47,7 +47,7 @@ public class PlayerMovement : NetworkBehaviour {
             if (Input.GetKey("a")) {
                 pos.x -= movementSpeed * Time.deltaTime * 7;
             }
-            
+            timer = 0;
         }
         rb.MovePosition(pos);
         timer += Time.deltaTime;
