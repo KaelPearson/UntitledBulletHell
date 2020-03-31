@@ -9,6 +9,7 @@ public class EnemyShoot : NetworkBehaviour
     float timer = 0;
     public GameObject bullet;
     public float speed = 5;
+    public LayerMask Mask;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,12 +57,33 @@ public class EnemyShoot : NetworkBehaviour
         // Spawns on server as well
         NetworkServer.Spawn(bulletInstance);
     }
+    bool CheckRayCast(Vector2 direction){
+        Vector2 startingPosition = new Vector2(transform.position.x, transform.position.y);
+
+        Debug.DrawRay(startingPosition, direction, Color.red);
+        RaycastHit2D hit = Physics2D.CircleCast(startingPosition, 0.2f, direction, 50f, Mask);
+        if(hit.collider != null){
+            Debug.Log(hit.collider.gameObject.layer);
+            if(hit.collider.gameObject.layer == 8){
+                return false;
+            }
+        }
+        return true;
+    }
     void fire(GameObject player){
         Vector2 shootDirection = new Vector2();
         shootDirection[0] = player.transform.position.x - transform.position.x;
-        shootDirection[1] = player.transform.position.y - transform.position.y; 
-
+        shootDirection[1] = player.transform.position.y - transform.position.y;
         RpcFire(shootDirection, transform.position);
+    }
+    bool checkIfFire(GameObject player){
+        Vector2 shootDirection = new Vector2();
+        shootDirection[0] = player.transform.position.x - transform.position.x;
+        shootDirection[1] = player.transform.position.y - transform.position.y;
+        if(CheckRayCast(shootDirection) == true){
+            return true;
+        }
+        return false;
     }
     // Update is called once per frame
     void Update()
@@ -72,7 +94,7 @@ public class EnemyShoot : NetworkBehaviour
 
 
         if(timer >= shootDelay){
-            if(closetPlayer != null && getPlayerDistance(closetPlayer) < 5){
+            if(closetPlayer != null && getPlayerDistance(closetPlayer) < 5 && checkIfFire(closetPlayer) == true){
                 fire(closetPlayer);
                 timer = 0;
             }

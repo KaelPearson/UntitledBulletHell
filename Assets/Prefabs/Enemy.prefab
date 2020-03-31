@@ -219,6 +219,9 @@ MonoBehaviour:
   shootDelay: 1.5
   bullet: {fileID: 2328155752225816964, guid: db2f6982d8e6a9949af160c55cd584fc, type: 3}
   speed: 5
+  Mask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!212 &924351605653993736
 SpriteRenderer:
   m_ObjectHideFlags: 0
