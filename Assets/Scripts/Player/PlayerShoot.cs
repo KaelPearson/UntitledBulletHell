@@ -16,8 +16,13 @@ public class PlayerShoot : NetworkBehaviour
         gunList.Add(Pistol);
         Gun AR = new Gun("AR", 10, 0.1f, 30);
         gunList.Add(AR);
+        newGun(Pistol);
     }
 
+    void newGun(Gun gun){
+        PlayerStats.Gun = gun.getName();
+        delayBetweenBullets = gun.getFireRate();
+    }
 
     [Command]
     void CmdFire(Vector2 shootDirection, Vector3 tranPos){
