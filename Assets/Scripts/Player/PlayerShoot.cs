@@ -8,7 +8,9 @@ public class PlayerShoot : NetworkBehaviour
     public float speed = 2;
 
     float timer = 0;
-    public float delayBetweenBullets = 1;
+    float delayBetweenBullets = 1;
+    float damage = 0;
+    float magazine = 0;
     public List<Gun> gunList = new List<Gun>(); 
     void Start()
     {
@@ -22,6 +24,8 @@ public class PlayerShoot : NetworkBehaviour
     void newGun(Gun gun){
         PlayerStats.Gun = gun.getName();
         delayBetweenBullets = gun.getFireRate();
+        damage = gun.getDamage();
+        magazine = gun.getMagazine();
     }
 
     [Command]
