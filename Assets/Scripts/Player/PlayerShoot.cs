@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.Threading;
+using UnityEngine.UI;
 public class PlayerShoot : NetworkBehaviour
 {
     public GameObject bullet;
     public float speed = 2;
-
+    public Text reloadCount;
     float timer = 0;
     float delayBetweenBullets = 1;
     float damage = 0;
     float magazine = 0;
+    float currentMag = 0;
     public List<Gun> gunList = new List<Gun>(); 
     void Start()
     {
@@ -18,7 +21,7 @@ public class PlayerShoot : NetworkBehaviour
         gunList.Add(Pistol);
         Gun AR = new Gun("AR", 10, 0.1f, 30);
         gunList.Add(AR);
-        newGun(Pistol);
+        newGun(AR);
     }
 
     void newGun(Gun gun){
@@ -26,6 +29,8 @@ public class PlayerShoot : NetworkBehaviour
         delayBetweenBullets = gun.getFireRate();
         damage = gun.getDamage();
         magazine = gun.getMagazine();
+        currentMag = magazine;
+        reloadCount.text = "Bullets: " + currentMag + " / " + magazine;
     }
 
     [Command]
@@ -57,15 +62,27 @@ public class PlayerShoot : NetworkBehaviour
         shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
         CmdFire(shootDirection, transform.position);
     }
-
+    bool reloading = false;
+    IEnumerator reload(){
+        reloading = true;
+        reloadCount.text = "Reloading...";
+        yield return new WaitForSeconds(5.0f);
+        reloading = false;
+        currentMag = magazine;
+        reloadCount.text = "Bullets: " + currentMag + " / " + magazine;
+    }
     void Update()
     {
         if(!base.isLocalPlayer){
             return;
         }
-        if (Input.GetMouseButton(0) && timer >= delayBetweenBullets) {
+        if (Input.GetMouseButton(0) && timer >= delayBetweenBullets && currentMag != 0) {
             fire();
+            currentMag--;
+            reloadCount.text = "Bullets: " + currentMag + " / " + magazine;
             timer = 0;
+        } else if (currentMag == 0 && reloading != true){
+            StartCoroutine(reload());
         }
         timer += Time.deltaTime;
     }

@@ -63,7 +63,6 @@ public class EnemyShoot : NetworkBehaviour
         Debug.DrawRay(startingPosition, direction, Color.red);
         RaycastHit2D hit = Physics2D.CircleCast(startingPosition, 0.2f, direction, 50f, Mask);
         if(hit.collider != null){
-            Debug.Log(hit.collider.gameObject.layer);
             if(hit.collider.gameObject.layer == 8){
                 return false;
             }
