@@ -9,10 +9,13 @@ public class PlayerShoot : NetworkBehaviour
 
     float timer = 0;
     public float delayBetweenBullets = 1;
-
+    public List<Gun> gunList = new List<Gun>(); 
     void Start()
     {
-
+        Gun Pistol = new Gun("Pistol", 25, 1f, 6);
+        gunList.Add(Pistol);
+        Gun AR = new Gun("AR", 10, 0.1f, 30);
+        gunList.Add(AR);
     }
 
 
@@ -51,7 +54,6 @@ public class PlayerShoot : NetworkBehaviour
         if(!base.isLocalPlayer){
             return;
         }
-
         if (Input.GetMouseButton(0) && timer >= delayBetweenBullets) {
             fire();
             timer = 0;
